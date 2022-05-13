@@ -4,6 +4,12 @@
  */
 package sorriso;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static javax.swing.JOptionPane.showMessageDialog;
+
+
 /**
  *
  * @author nicoe
@@ -169,16 +175,25 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1FocusLost
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
             Database_login login = new Database_login();
             
-            login.setUser(jTextField1.getText());
-            login.setPassword(String.valueOf(jPasswordField1.getPassword()));
+            login.setEmail(jTextField1.getText());
+            login.setSenha(String.valueOf(jPasswordField1.getPassword()));
             
-            System.out.println(login.getUser());
-            System.out.println(login.getPassword());
+            login.login();
+            showMessageDialog(null,login.getResponse());
 
+            System.out.println(login.getResponse());
             
-        // TODO add your handling code here:
+            
+            
+            // TODO add your handling code here:
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

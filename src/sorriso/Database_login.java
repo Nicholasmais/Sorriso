@@ -10,91 +10,121 @@ import java.sql.ResultSet;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 /**
  *
  * @author nicoe
  */
 public class Database_login {
 
-    public String getUser() {
-        return user;
+    public int getId_pessoa() {
+        return id_pessoa;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setId_pessoa(int id_pessoa) {
+        this.id_pessoa = id_pessoa;
     }
 
-    public String getPassword() {
-        return password;
+    public String getNome() {
+        return nome;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
-    
-            public String user;
-            public String password;
-    
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getFuncao() {
+        return funcao;
+    }
+
+    public void setFuncao(String funcao) {
+        this.funcao = funcao;
+    }
+
+    public int getId_agenda() {
+        return id_agenda;
+    }
+
+    public void setId_agenda(int id_agenda) {
+        this.id_agenda = id_agenda;
+    }
+
+    public String getResponse() {
+        return response;
+    }
+
+    public void setResponse(String response) {
+        this.response = response;
+    }
+
+            public int id_pessoa;
+            public String nome;
+            public String telefone;
+            public String email;
+            public String senha;
+            public String funcao;
+            public int id_agenda;
+            public String response;
             
             
-               public void actionPerformed(ActionEvent e) {
-            try{
+               public void login() throws ClassNotFoundException, SQLException {
+           
                String myDriver = "com.mysql.jdbc.Driver";
-               String myUrl = "jdbc:mysql://localhost:3306/provaprog";
+               String myUrl = "jdbc:mysql://localhost:3306/sorriso";
                Class.forName(myDriver);
                Connection conn = DriverManager.getConnection(myUrl, "root", "");
                
-               String query = "SELECT u.id_usuario,u.username, p.nome FROM usuario u INNER JOIN perfil p on p.id_perfil = u.id_usuario where u.username = ? and u.senha = ?" ;
+               String query = "SELECT p.nome,p.id_pessoa FROM pessoa p WHERE p.email = ? and p.senha = ?" ;
                
                PreparedStatement preparedStmt = conn.prepareStatement(query);
-               preparedStmt.setString (1,usuario.getText());
-               preparedStmt.setString(2,senha.getText());
+               preparedStmt.setString (1,getEmail());
+               preparedStmt.setString(2,getSenha());
        
          
                // execute the preparedstatement
                ResultSet rs = preparedStmt.executeQuery();
-               String id_usuario = null;
-               String nome_ = null;
-               String username = null;
+               String nome = null;
+               String telefone = null;
+               
                if(rs.next()){
-               id_usuario = rs.getString(1);
-               username = rs.getString(2);
-               nome_ = rs.getString(3);}
-
+               nome = rs.getString(1);
+               telefone = rs.getString(2);}
                
-                if(id_usuario != null){
-               status.setText("<html>Login com sucesso!\n Olá "+nome_+", seu id de usuario: " + id_usuario+"</html>");
-               String queryperfil = " insert into ultimo_login(username) VALUES(?)";
-               PreparedStatement preparedStmtPerfil = conn.prepareStatement(queryperfil);
-               preparedStmtPerfil.setString (1,username);
-               preparedStmtPerfil.executeUpdate();
+               String response = "Faça o login corretamente";
                
-               String querycont = " select cont from contador";
-               PreparedStatement preparedStmtCont = conn.prepareStatement(querycont);
-               ResultSet rs_cont = preparedStmtCont.executeQuery();
-               int cont = 0;
-               if(rs_cont.next()){
-               cont = rs_cont.getInt(1);}
-               cont++;
-
-               String querycontador = " update  contador set cont = ?  where cont >=0  limit 1";
-               PreparedStatement preparedStmtContador = conn.prepareStatement(querycontador);
-               preparedStmtContador.setInt(1,cont);
-               preparedStmtContador.executeUpdate();
-            
-            }
+                if(nome != null){
+               response = "Login com sucesso!\n Olá "+nome+", seu id de usuario: " + telefone;}
             
                 else{
-                status.setText("usuario ou senha invalidos");
-                }
+                response = "usuario ou senha invalidos";}
+                
                 conn.close();
-               }
-               catch (Exception e2)
-               {
-                 System.err.println("Got an exception!");
-                 System.err.println(e2.getMessage());
-                 e2.printStackTrace();
-               }    
+            
+                this.response = response;
          }
-      }
 }
+
