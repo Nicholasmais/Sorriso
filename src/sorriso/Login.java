@@ -72,6 +72,11 @@ public class Login extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(7, 12, 38));
         jButton1.setText("Entrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jTextField1.setBackground(new java.awt.Color(7, 12, 38));
         jTextField1.setFont(new java.awt.Font("Gill Sans MT", 1, 18)); // NOI18N
@@ -162,6 +167,19 @@ public class Login extends javax.swing.JFrame {
 
     private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
     }//GEN-LAST:event_jTextField1FocusLost
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            Database_login login = new Database_login();
+            
+            login.setUser(jTextField1.getText());
+            login.setPassword(String.valueOf(jPasswordField1.getPassword()));
+            
+            System.out.println(login.getUser());
+            System.out.println(login.getPassword());
+
+            
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
