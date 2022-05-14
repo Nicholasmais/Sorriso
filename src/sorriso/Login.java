@@ -184,7 +184,7 @@ public class Login extends javax.swing.JFrame {
             login.login();
             showMessageDialog(null,login.getResponse());
 
-            System.out.println(login.getResponse());
+            
             
             
             

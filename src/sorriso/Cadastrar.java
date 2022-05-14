@@ -4,6 +4,11 @@
  */
 package sorriso;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static javax.swing.JOptionPane.showMessageDialog;
+
 /**
  *
  * @author nicoe
@@ -345,7 +350,26 @@ public class Cadastrar extends javax.swing.JFrame {
     }//GEN-LAST:event_nome_txtfiledActionPerformed
 
     private void ok_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ok_buttonActionPerformed
-        // TODO add your handling code here:
+        Database_cadastro cadastro = new Database_cadastro();
+        
+        cadastro.setNome(nome_txtfiled.getText());
+        cadastro.setTelefone(telefone_txtfield.getText());
+        cadastro.setEmail(emial_txtfield.getText());
+        cadastro.setSenha(senha_txtfield.getText());
+        cadastro.setFuncao(jComboBox1.getSelectedItem().toString());
+        
+        try {
+            cadastro.cadastrar();
+            
+        }
+        catch (ClassNotFoundException ex) {
+            Logger.getLogger(Cadastrar.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Cadastrar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        showMessageDialog(null,cadastro.getResponse());
+        
     }//GEN-LAST:event_ok_buttonActionPerformed
 
     /**
@@ -412,4 +436,4 @@ public class Cadastrar extends javax.swing.JFrame {
     private javax.swing.JTextField telefone_txtfield;
     // End of variables declaration//GEN-END:variables
 }
-jComboBox1.addItem("Dentista");
+
