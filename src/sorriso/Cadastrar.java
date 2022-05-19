@@ -360,15 +360,13 @@ public class Cadastrar extends javax.swing.JFrame {
         
         try {
             cadastro.cadastrar();
-            
+            showMessageDialog(null,cadastro.getResponse());
         }
-        catch (ClassNotFoundException ex) {
-            Logger.getLogger(Cadastrar.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Cadastrar.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        catch (Exception ex) {
+            showMessageDialog(null,cadastro.getResponse());
+        } 
         
-        showMessageDialog(null,cadastro.getResponse());
+        
         
     }//GEN-LAST:event_ok_buttonActionPerformed
 

@@ -4,6 +4,11 @@
  */
 package sorriso;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static javax.swing.JOptionPane.showMessageDialog;
+
 /**
  *
  * @author nicoe
@@ -47,26 +52,20 @@ public class Calendario extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(152, 169, 250));
 
-        jLabel1.setFont(new java.awt.Font("Gill Sans MT", 0, 20)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Calendário");
+        jLabel1.setFont(new java.awt.Font("Gill Sans MT", 0, 20)); // NOI18N
 
         jPanel2.setBackground(new java.awt.Color(11, 19, 64));
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Data da consulta");
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setText("Email paciente");
 
         jLabel4.setText("Email médico");
 
         jLabel5.setText("Descrição");
-
-        jTextField1.setText("jTextField1");
-
-        jTextField2.setText("jTextField2");
-
-        jTextField3.setText("jTextField3");
 
         jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -170,9 +169,18 @@ public class Calendario extends javax.swing.JFrame {
         calendar.setDate(dateTimePicker1.getDatePicker().toString());
         calendar.setHorario(dateTimePicker1.getTimePicker().toString());
         calendar.setOperacao(jTextField3.getText());
-         
-        System.out.println(calendar.getDate());
-        System.out.println(calendar.getHorario());
+        
+        try {
+            calendar.cadastrar();
+            showMessageDialog(null,calendar.getResponse());
+            
+        } catch (Exception ex) {
+            showMessageDialog(null,calendar.getResponse());
+        } 
+        
+        
+           
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

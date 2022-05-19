@@ -7,7 +7,9 @@ package sorriso;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  *
@@ -68,8 +70,65 @@ public class Database_calendar {
             public String date;
             public String horario;
             public String operacao;
+
+    public String getResponse() {
+        return response;
+    }
+
+    public void setResponse(String response) {
+        this.response = response;
+    }
             public String response;
             
+    public void cadastrar() throws ClassNotFoundException, SQLException {
+           
+               String myDriver = "com.mysql.jdbc.Driver";
+               String myUrl = "jdbc:mysql://localhost:3306/sorriso";
+               Class.forName(myDriver);
+               Connection conn = DriverManager.getConnection(myUrl, "root", "");
+               
+               CheckIfPersonExists check = new CheckIfPersonExists();
+               
+               if (!check.check(getEmail_dentista())){
+                     this.response  = "Médico não cadastrado.";
+                     System.out.println(check.check(getEmail_dentista()));
+               }
+               else {
+                   if (!check.check(getEmail_cliente())){
+                   this.response = "cliente não cadastrado.";
+                   }
+                   
+               else{
+       
+               String query = "INSERT INTO consulta(operacao, nome_dentista, nome_cliente, data_consulta, horario_consulta, consulta) VALUES (?,?,?,?,?,?)" ;
+               
+               PreparedStatement preparedStmt = conn.prepareStatement(query);
+               preparedStmt.setString (1,getOperacao());
+               preparedStmt.setString(2,getEmail_dentista());
+               preparedStmt.setString(3,getEmail_cliente());
+               preparedStmt.setString(4,getDate());
+               preparedStmt.setString(5,getHorario());
+               preparedStmt.setString(6,getDate() +" " +getHorario());
+       
+               
+               // execute the preparedstatement
+               try{
+               preparedStmt.executeUpdate();
+               this.response = "Cadastrado";
+               }
+               
+               catch (Exception e2){
+               System.err.println(e2.getMessage());
+                      
+               this.response = "Não cadastrado: "+e2.getMessage();
+}
+               
+         
+               
+                conn.close();
+                       
+              }
+         }}
             
             
             

@@ -91,7 +91,14 @@ public class Database_cadastro {
             
             
                public void cadastrar() throws ClassNotFoundException, SQLException {
-           
+                   
+                  CheckIfPersonExists check = new CheckIfPersonExists();
+                  if (check.check(getEmail())){
+                     this.response  = "Usuário já cadastrado.";
+               }
+               else {
+            
+                   
                String myDriver = "com.mysql.jdbc.Driver";
                String myUrl = "jdbc:mysql://localhost:3306/sorriso";
                Class.forName(myDriver);
@@ -106,26 +113,19 @@ public class Database_cadastro {
                preparedStmt.setString(4,getSenha());
                preparedStmt.setString(5,getFuncao());
        
-         
+            
                // execute the preparedstatement
                try{
-               preparedStmt.executeUpdate();}
+               preparedStmt.executeUpdate();
+               this.response = nome + " Cadastrado.";
+               }
                
                catch (Exception e2){
                 System.err.println(e2.getMessage());
+                this.response = "Erro ao cadastrar: " + e2.getMessage();
 }
-               
-               
-               String response = "Não cadastrado";
-               
-                if(nome != null){
-               response = nome + " Cadastrado.";}
-            
-                else{
-                response = "Erro ao cadastrar: ";}
-                
+             
                 conn.close();
-            
-                this.response = response;
-         }
+      
+         }}
 }

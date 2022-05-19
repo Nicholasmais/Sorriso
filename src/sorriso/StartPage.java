@@ -53,6 +53,7 @@ public class StartPage extends javax.swing.JFrame {
         });
 
         jButton2.setText("Calendário");
+        jButton2.setEnabled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -171,6 +172,7 @@ public class StartPage extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new StartPage().setVisible(true);
+                
             }
         });
     }

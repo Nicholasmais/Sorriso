@@ -117,8 +117,10 @@ public class Database_login {
                String response = "Faça o login corretamente";
                
                 if(nome != null){
-               response = "Login com sucesso!\n Olá "+nome+", seu id de usuario: " + telefone;}
-            
+               response = "Login com sucesso!\n Olá "+nome+", seu id de usuario: " + telefone;
+                jButton2.setEnabled(true);
+                }
+               
                 else{
                 response = "usuario ou senha invalidos";}
                 
