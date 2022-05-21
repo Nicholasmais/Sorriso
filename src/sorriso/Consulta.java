@@ -13,12 +13,12 @@ import static javax.swing.JOptionPane.showMessageDialog;
  *
  * @author nicoe
  */
-public class Calendario extends javax.swing.JFrame {
+public class Consulta extends javax.swing.JFrame {
 
     /**
      * Creates new form Calendario
      */
-    public Calendario() {
+    public Consulta() {
         initComponents();
     }
 
@@ -46,14 +46,14 @@ public class Calendario extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         setBackground(new java.awt.Color(11, 19, 64));
         setForeground(new java.awt.Color(255, 112, 147));
 
         jPanel1.setBackground(new java.awt.Color(152, 169, 250));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Calendário");
+        jLabel1.setText("Consulta");
         jLabel1.setFont(new java.awt.Font("Gill Sans MT", 0, 20)); // NOI18N
 
         jPanel2.setBackground(new java.awt.Color(11, 19, 64));
@@ -161,7 +161,7 @@ public class Calendario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Database_calendar calendar = new Database_calendar();
+        Database_consulta calendar = new Database_consulta();
         
         
         calendar.setEmail_dentista(jTextField2.getText());
@@ -201,20 +201,21 @@ public class Calendario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Calendario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Consulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Calendario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Consulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Calendario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Consulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Calendario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Consulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Calendario().setVisible(true);
+                new Consulta().setVisible(true);
             }
         });
     }

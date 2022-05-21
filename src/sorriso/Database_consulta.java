@@ -15,7 +15,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
  *
  * @author nicoe
  */
-public class Database_calendar {
+public class Database_consulta {
 
     public int getId_consulta() {
         return id_consulta;
