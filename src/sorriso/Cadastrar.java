@@ -58,7 +58,7 @@ public class Cadastrar extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
 
-        jFrame1.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jFrame1.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         jFrame1.getContentPane().setLayout(null);
 
         jPanel3.setBackground(new java.awt.Color(152, 169, 250));
@@ -84,7 +84,7 @@ public class Cadastrar extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
                 .addGap(93, 93, 93))
         );
 
@@ -178,9 +178,8 @@ public class Cadastrar extends javax.swing.JFrame {
         jLabel4.setName(""); // NOI18N
         jLabel4.setPreferredSize(new java.awt.Dimension(240, 140));
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(510, 410));
-        setPreferredSize(new java.awt.Dimension(510, 410));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -360,15 +359,13 @@ public class Cadastrar extends javax.swing.JFrame {
         
         try {
             cadastro.cadastrar();
-            
+            showMessageDialog(null,cadastro.getResponse());
         }
-        catch (ClassNotFoundException ex) {
-            Logger.getLogger(Cadastrar.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Cadastrar.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        catch (Exception ex) {
+            showMessageDialog(null,cadastro.getResponse());
+        } 
         
-        showMessageDialog(null,cadastro.getResponse());
+        
         
     }//GEN-LAST:event_ok_buttonActionPerformed
 

@@ -7,6 +7,7 @@ package sorriso;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 
@@ -14,8 +15,12 @@ import static javax.swing.JOptionPane.showMessageDialog;
  *
  * @author nicoe
  */
-public class Login extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame{
+    JButton button;
 
+    public void setButton(JButton button) {
+        this.button = button;
+    }
     /**
      * Creates new form Login
      */
@@ -41,7 +46,7 @@ public class Login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(152, 169, 250));
@@ -176,13 +181,14 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            Database_login login = new Database_login();
+            Database_login login2 = new Database_login();
             
-            login.setEmail(jTextField1.getText());
-            login.setSenha(String.valueOf(jPasswordField1.getPassword()));
+            login2.setEmail(jTextField1.getText());
+            login2.setSenha(String.valueOf(jPasswordField1.getPassword()));
             
-            login.login();
-            showMessageDialog(null,login.getResponse());
+            login2.login();
+            login2.logado(button);
+            showMessageDialog(null,login2.getResponse());
 
             
             

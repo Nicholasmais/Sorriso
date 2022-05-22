@@ -11,11 +11,12 @@ import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import javax.swing.JButton;
 /**
  *
  * @author nicoe
  */
-public class Database_login {
+public class Database_login extends StartPage {
 
     public int getId_pessoa() {
         return id_pessoa;
@@ -89,7 +90,11 @@ public class Database_login {
             public String funcao;
             public int id_agenda;
             public String response;
+            public boolean login;
             
+               public void logado(JButton button){
+                button.setEnabled(login);
+               }
             
                public void login() throws ClassNotFoundException, SQLException {
            
@@ -117,8 +122,11 @@ public class Database_login {
                String response = "Faça o login corretamente";
                
                 if(nome != null){
-               response = "Login com sucesso!\n Olá "+nome+", seu id de usuario: " + telefone;}
-            
+               response = "Login com sucesso!\n Olá "+nome+", seu id de usuario: " + telefone;
+                this.login = true;
+                
+                }
+               
                 else{
                 response = "usuario ou senha invalidos";}
                 
