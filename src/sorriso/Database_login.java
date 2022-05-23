@@ -92,8 +92,9 @@ public class Database_login extends StartPage {
             public String response;
             public boolean login;
             
-               public void logado(JButton button){
+               public void logado(JButton button, JButton button2){
                 button.setEnabled(login);
+                button2.setEnabled(login);
                }
             
                public void login() throws ClassNotFoundException, SQLException {

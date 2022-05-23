@@ -17,9 +17,11 @@ import static javax.swing.JOptionPane.showMessageDialog;
  */
 public class Login extends javax.swing.JFrame{
     JButton button;
+    JButton button2;
 
-    public void setButton(JButton button) {
+    public void setButton(JButton button, JButton button2) {
         this.button = button;
+        this.button2 = button2;
     }
     /**
      * Creates new form Login
@@ -187,7 +189,7 @@ public class Login extends javax.swing.JFrame{
             login2.setSenha(String.valueOf(jPasswordField1.getPassword()));
             
             login2.login();
-            login2.logado(button);
+            login2.logado(button, button2);
             showMessageDialog(null,login2.getResponse());
 
             

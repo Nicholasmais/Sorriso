@@ -74,6 +74,7 @@ public class StartPage extends javax.swing.JFrame {
         });
 
         jButton5.setText("Anamnese");
+        jButton5.setEnabled(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -157,7 +158,7 @@ public class StartPage extends javax.swing.JFrame {
         login.setLocation(0,130);
         login.setResizable(false);
         login.requestFocus();
-        login.setButton(jButton2);
+        login.setButton(jButton2, jButton5);
         login.setVisible(true); 
         
         
@@ -189,11 +190,19 @@ public class StartPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       Anamnese anamnese = new Anamnese();
-       anamnese.setSize(700,600);
-       anamnese.setLocation(510,130);
-       anamnese.setResizable(false);
-       anamnese.setVisible(true);
+       Anamnese anamnese;
+        try {
+            anamnese = new Anamnese();
+            anamnese.setSize(700,600);
+            anamnese.setLocation(510,130);
+            anamnese.setResizable(false);
+            anamnese.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(StartPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(StartPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**

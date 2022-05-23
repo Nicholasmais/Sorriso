@@ -4,6 +4,14 @@
  */
 package sorriso;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author henry
@@ -13,8 +21,31 @@ public class Anamnese extends javax.swing.JFrame {
     /**
      * Creates new form Anamnese
      */
-    public Anamnese() {
+    public Anamnese() throws ClassNotFoundException, SQLException {
         initComponents();
+        
+        
+        
+        String myDriver = "com.mysql.jdbc.Driver";
+        String myUrl = "jdbc:mysql://localhost:3306/sorriso";
+        Class.forName(myDriver);
+        Connection conn = DriverManager.getConnection(myUrl, "root", "");
+             
+
+        String queryconteudo = " SELECT email FROM pessoa";
+        PreparedStatement preparedStmtGetPost = conn.prepareStatement(queryconteudo);
+           // preparedStmtGetPost.setString(1,username);
+
+        ResultSet rs3 = preparedStmtGetPost.executeQuery();
+
+        while (rs3.next()) {
+                
+                jComboBox1.addItem(rs3.getString(1));
+                
+            }
+        
+        
+        
     }
 
     /**
@@ -201,7 +232,6 @@ public class Anamnese extends javax.swing.JFrame {
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sorriso/imagem_2022-05-22_141938053-fococlipping-standard.png"))); // NOI18N
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, 210, 220));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 170, -1));
 
         jTextArea2.setColumns(20);
@@ -282,7 +312,13 @@ public class Anamnese extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Anamnese().setVisible(true);
+                try {
+                    new Anamnese().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Anamnese.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Anamnese.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
