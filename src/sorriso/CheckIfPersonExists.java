@@ -17,17 +17,18 @@ import java.sql.SQLException;
 public class CheckIfPersonExists {
    
     
-    public boolean check(String email) throws ClassNotFoundException, SQLException{
+    public boolean check(String email, String funcao) throws ClassNotFoundException, SQLException{
                String myDriver = "com.mysql.jdbc.Driver";
                String myUrl = "jdbc:mysql://localhost:3306/sorriso";
                Class.forName(myDriver);
                Connection conn = DriverManager.getConnection(myUrl, "root", "");
                
         
-               String query = "select nome from pessoa WHERE email = ?";
+               String query = "select nome from pessoa WHERE email = ? AND funcao = ?";
                
                PreparedStatement preparedStmt = conn.prepareStatement(query);
                preparedStmt.setString (1,email);
+               preparedStmt.setString (2,funcao);
          
                // execute the preparedstatement
                ResultSet rs = preparedStmt.executeQuery();

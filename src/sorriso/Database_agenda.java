@@ -78,7 +78,7 @@ public class Database_agenda extends Agenda{
                 jLabels[i].setSize(400,400);
                 jLabels[i].setBorder(border);
                 jPanel2.add(jLabels[i]);
-                System.out.println(list_operacao.get(i));
+                
             }
     }
 }
