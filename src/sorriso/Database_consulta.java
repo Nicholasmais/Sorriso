@@ -89,11 +89,11 @@ public class Database_consulta {
                
                CheckIfPersonExists check = new CheckIfPersonExists();
                
-               if (!check.check(getEmail_dentista(),"medico")){
+               if (!check.check(getEmail_dentista())){
                      this.response  = "Médico não cadastrado.";
                }
                else {
-                   if (!check.check(getEmail_cliente(),"cliente")){
+                   if (!check.check(getEmail_cliente())){
                    this.response = "cliente não cadastrado.";
                    }
                    

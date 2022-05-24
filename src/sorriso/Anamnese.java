@@ -4,6 +4,7 @@
  */
 package sorriso;
 
+import java.awt.Checkbox;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  *
@@ -32,7 +34,7 @@ public class Anamnese extends javax.swing.JFrame {
         Connection conn = DriverManager.getConnection(myUrl, "root", "");
              
 
-        String queryconteudo = " SELECT email FROM pessoa";
+        String queryconteudo = " SELECT email FROM pessoa WHERE funcao = 'cliente'";
         PreparedStatement preparedStmtGetPost = conn.prepareStatement(queryconteudo);
            // preparedStmtGetPost.setString(1,username);
 
@@ -47,7 +49,18 @@ public class Anamnese extends javax.swing.JFrame {
         
         
     }
-
+    public void alterna_botao(Checkbox clica, Checkbox anterior){
+      
+        if (clica.getState()){
+            clica.setState(false);
+            anterior.setState(true);
+        }
+        else{
+            clica.setState(true);
+            anterior.setState(false);
+        }
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,31 +70,25 @@ public class Anamnese extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jToggleButton1 = new javax.swing.JToggleButton();
+        jToggleButton2 = new javax.swing.JToggleButton();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
+        buttonGroup4 = new javax.swing.ButtonGroup();
+        buttonGroup5 = new javax.swing.ButtonGroup();
+        buttonGroup6 = new javax.swing.ButtonGroup();
+        buttonGroup7 = new javax.swing.ButtonGroup();
+        buttonGroup8 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        checkbox1 = new java.awt.Checkbox();
-        checkbox2 = new java.awt.Checkbox();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        checkbox3 = new java.awt.Checkbox();
-        checkbox4 = new java.awt.Checkbox();
         jLabel4 = new javax.swing.JLabel();
-        checkbox5 = new java.awt.Checkbox();
-        checkbox6 = new java.awt.Checkbox();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        checkbox7 = new java.awt.Checkbox();
-        checkbox8 = new java.awt.Checkbox();
-        checkbox9 = new java.awt.Checkbox();
-        checkbox10 = new java.awt.Checkbox();
-        checkbox11 = new java.awt.Checkbox();
-        checkbox12 = new java.awt.Checkbox();
-        checkbox13 = new java.awt.Checkbox();
-        checkbox14 = new java.awt.Checkbox();
         jLabel9 = new javax.swing.JLabel();
-        checkbox15 = new java.awt.Checkbox();
-        checkbox16 = new java.awt.Checkbox();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -89,22 +96,32 @@ public class Anamnese extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
+        jRadioButton5 = new javax.swing.JRadioButton();
+        jRadioButton6 = new javax.swing.JRadioButton();
+        jRadioButton7 = new javax.swing.JRadioButton();
+        jRadioButton8 = new javax.swing.JRadioButton();
+        jRadioButton9 = new javax.swing.JRadioButton();
+        jRadioButton10 = new javax.swing.JRadioButton();
+        jRadioButton11 = new javax.swing.JRadioButton();
+        jRadioButton12 = new javax.swing.JRadioButton();
+        jRadioButton13 = new javax.swing.JRadioButton();
+        jRadioButton14 = new javax.swing.JRadioButton();
+        jRadioButton15 = new javax.swing.JRadioButton();
+        jRadioButton16 = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+
+        jToggleButton1.setText("jToggleButton1");
+
+        jToggleButton2.setText("jToggleButton2");
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 153));
         jPanel1.setForeground(new java.awt.Color(102, 102, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        checkbox1.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        checkbox1.setForeground(new java.awt.Color(255, 255, 255));
-        checkbox1.setLabel("SIM");
-        jPanel1.add(checkbox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, -1, -1));
-
-        checkbox2.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        checkbox2.setForeground(new java.awt.Color(255, 255, 255));
-        checkbox2.setLabel("NÃO");
-        jPanel1.add(checkbox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -116,30 +133,10 @@ public class Anamnese extends javax.swing.JFrame {
         jLabel3.setText("Fumante");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 78, -1, -1));
 
-        checkbox3.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        checkbox3.setForeground(new java.awt.Color(255, 255, 255));
-        checkbox3.setLabel("SIM");
-        jPanel1.add(checkbox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, -1, -1));
-
-        checkbox4.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        checkbox4.setForeground(new java.awt.Color(255, 255, 255));
-        checkbox4.setLabel("NÃO");
-        jPanel1.add(checkbox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, -1, -1));
-
         jLabel4.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Usuário de Drogas");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 111, -1, -1));
-
-        checkbox5.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        checkbox5.setForeground(new java.awt.Color(255, 255, 255));
-        checkbox5.setLabel("NÃO");
-        jPanel1.add(checkbox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, -1, -1));
-
-        checkbox6.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        checkbox6.setForeground(new java.awt.Color(255, 255, 255));
-        checkbox6.setLabel("SIM");
-        jPanel1.add(checkbox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -161,60 +158,10 @@ public class Anamnese extends javax.swing.JFrame {
         jLabel8.setText("Periodontite");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
 
-        checkbox7.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        checkbox7.setForeground(new java.awt.Color(255, 255, 255));
-        checkbox7.setLabel("SIM");
-        jPanel1.add(checkbox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, -1, -1));
-
-        checkbox8.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        checkbox8.setForeground(new java.awt.Color(255, 255, 255));
-        checkbox8.setLabel("SIM");
-        jPanel1.add(checkbox8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, -1, -1));
-
-        checkbox9.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        checkbox9.setForeground(new java.awt.Color(255, 255, 255));
-        checkbox9.setLabel("SIM");
-        jPanel1.add(checkbox9, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, -1, -1));
-
-        checkbox10.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        checkbox10.setForeground(new java.awt.Color(255, 255, 255));
-        checkbox10.setLabel("SIM");
-        jPanel1.add(checkbox10, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, -1, -1));
-
-        checkbox11.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        checkbox11.setForeground(new java.awt.Color(255, 255, 255));
-        checkbox11.setLabel("NÃO");
-        jPanel1.add(checkbox11, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, -1, -1));
-
-        checkbox12.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        checkbox12.setForeground(new java.awt.Color(255, 255, 255));
-        checkbox12.setLabel("NÃO");
-        jPanel1.add(checkbox12, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, -1, -1));
-
-        checkbox13.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        checkbox13.setForeground(new java.awt.Color(255, 255, 255));
-        checkbox13.setLabel("NÃO");
-        jPanel1.add(checkbox13, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, -1, -1));
-
-        checkbox14.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        checkbox14.setForeground(new java.awt.Color(255, 255, 255));
-        checkbox14.setLabel("NÃO");
-        jPanel1.add(checkbox14, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, -1, -1));
-
         jLabel9.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Tratamento Médico");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
-
-        checkbox15.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        checkbox15.setForeground(new java.awt.Color(255, 255, 255));
-        checkbox15.setLabel("SIM");
-        jPanel1.add(checkbox15, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, -1, -1));
-
-        checkbox16.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        checkbox16.setForeground(new java.awt.Color(255, 255, 255));
-        checkbox16.setLabel("NÃO");
-        jPanel1.add(checkbox16, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(204, 204, 204));
@@ -239,6 +186,118 @@ public class Anamnese extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTextArea2);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 230, -1));
+
+        jRadioButton1.setBackground(new java.awt.Color(0, 51, 153));
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jRadioButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton1.setText("SIM");
+        jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, -1, -1));
+
+        jRadioButton2.setBackground(new java.awt.Color(0, 51, 153));
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton2.setText("NÃO");
+        jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, -1, -1));
+
+        jRadioButton3.setBackground(new java.awt.Color(0, 51, 153));
+        buttonGroup2.add(jRadioButton3);
+        jRadioButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jRadioButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton3.setText("SIM");
+        jPanel1.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, -1, -1));
+
+        jRadioButton4.setBackground(new java.awt.Color(0, 51, 153));
+        buttonGroup2.add(jRadioButton4);
+        jRadioButton4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jRadioButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton4.setText("NÃO");
+        jPanel1.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, -1, -1));
+
+        jRadioButton5.setBackground(new java.awt.Color(0, 51, 153));
+        buttonGroup3.add(jRadioButton5);
+        jRadioButton5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jRadioButton5.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton5.setText("SIM");
+        jPanel1.add(jRadioButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, -1, -1));
+
+        jRadioButton6.setBackground(new java.awt.Color(0, 51, 153));
+        buttonGroup3.add(jRadioButton6);
+        jRadioButton6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jRadioButton6.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton6.setText("NÃO");
+        jPanel1.add(jRadioButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 110, -1, -1));
+
+        jRadioButton7.setBackground(new java.awt.Color(0, 51, 153));
+        buttonGroup4.add(jRadioButton7);
+        jRadioButton7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jRadioButton7.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton7.setText("SIM");
+        jPanel1.add(jRadioButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, -1, -1));
+
+        jRadioButton8.setBackground(new java.awt.Color(0, 51, 153));
+        buttonGroup4.add(jRadioButton8);
+        jRadioButton8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jRadioButton8.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton8.setText("NÃO");
+        jPanel1.add(jRadioButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, -1, -1));
+
+        jRadioButton9.setBackground(new java.awt.Color(0, 51, 153));
+        buttonGroup5.add(jRadioButton9);
+        jRadioButton9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jRadioButton9.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton9.setText("SIM");
+        jPanel1.add(jRadioButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, -1, -1));
+
+        jRadioButton10.setBackground(new java.awt.Color(0, 51, 153));
+        buttonGroup5.add(jRadioButton10);
+        jRadioButton10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jRadioButton10.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton10.setText("NÃO");
+        jPanel1.add(jRadioButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 170, -1, -1));
+
+        jRadioButton11.setBackground(new java.awt.Color(0, 51, 153));
+        buttonGroup6.add(jRadioButton11);
+        jRadioButton11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jRadioButton11.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton11.setText("SIM");
+        jPanel1.add(jRadioButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, -1, -1));
+
+        jRadioButton12.setBackground(new java.awt.Color(0, 51, 153));
+        buttonGroup6.add(jRadioButton12);
+        jRadioButton12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jRadioButton12.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton12.setText("NÃO");
+        jPanel1.add(jRadioButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, -1, -1));
+
+        jRadioButton13.setBackground(new java.awt.Color(0, 51, 153));
+        buttonGroup7.add(jRadioButton13);
+        jRadioButton13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jRadioButton13.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton13.setText("SIM");
+        jPanel1.add(jRadioButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, -1, -1));
+
+        jRadioButton14.setBackground(new java.awt.Color(0, 51, 153));
+        buttonGroup7.add(jRadioButton14);
+        jRadioButton14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jRadioButton14.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton14.setText("NÃO");
+        jPanel1.add(jRadioButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, -1, -1));
+
+        jRadioButton15.setBackground(new java.awt.Color(0, 51, 153));
+        buttonGroup8.add(jRadioButton15);
+        jRadioButton15.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jRadioButton15.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton15.setText("SIM");
+        jPanel1.add(jRadioButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, -1, -1));
+
+        jRadioButton16.setBackground(new java.awt.Color(0, 51, 153));
+        buttonGroup8.add(jRadioButton16);
+        jRadioButton16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jRadioButton16.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton16.setText("NÃO");
+        jPanel1.add(jRadioButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -324,22 +383,14 @@ public class Anamnese extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Checkbox checkbox1;
-    private java.awt.Checkbox checkbox10;
-    private java.awt.Checkbox checkbox11;
-    private java.awt.Checkbox checkbox12;
-    private java.awt.Checkbox checkbox13;
-    private java.awt.Checkbox checkbox14;
-    private java.awt.Checkbox checkbox15;
-    private java.awt.Checkbox checkbox16;
-    private java.awt.Checkbox checkbox2;
-    private java.awt.Checkbox checkbox3;
-    private java.awt.Checkbox checkbox4;
-    private java.awt.Checkbox checkbox5;
-    private java.awt.Checkbox checkbox6;
-    private java.awt.Checkbox checkbox7;
-    private java.awt.Checkbox checkbox8;
-    private java.awt.Checkbox checkbox9;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.ButtonGroup buttonGroup5;
+    private javax.swing.ButtonGroup buttonGroup6;
+    private javax.swing.ButtonGroup buttonGroup7;
+    private javax.swing.ButtonGroup buttonGroup8;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
@@ -356,7 +407,25 @@ public class Anamnese extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton10;
+    private javax.swing.JRadioButton jRadioButton11;
+    private javax.swing.JRadioButton jRadioButton12;
+    private javax.swing.JRadioButton jRadioButton13;
+    private javax.swing.JRadioButton jRadioButton14;
+    private javax.swing.JRadioButton jRadioButton15;
+    private javax.swing.JRadioButton jRadioButton16;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioButton5;
+    private javax.swing.JRadioButton jRadioButton6;
+    private javax.swing.JRadioButton jRadioButton7;
+    private javax.swing.JRadioButton jRadioButton8;
+    private javax.swing.JRadioButton jRadioButton9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
     // End of variables declaration//GEN-END:variables
 }
