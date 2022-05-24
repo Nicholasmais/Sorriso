@@ -74,8 +74,9 @@ public class Database_agenda extends Agenda{
 
             JLabel[] jLabels = new JLabel[total];
             for (int i = 0; i < total;i++){
-                jLabels[i] = new JLabel("<html> Operação: "+list_operacao.get(i) +" Data: "+list_consulta.get(i) + "<br> Paciente: "+list_nome_cliente.get(i)+ " | Médico: " + list_nome_dentista.get(i)); 
-                jLabels[i].setSize(400,400);
+                jLabels[i] = new JLabel("<html><br> Operação: "+list_operacao.get(i) +" Data: "+list_consulta.get(i) + "<br> Paciente: "+list_nome_cliente.get(i)+ " | Médico: " + list_nome_dentista.get(i)+"<br> ."); 
+                jLabels[i].setForeground(Color.WHITE);
+                jLabels[i].setSize(700,400);
                 jLabels[i].setBorder(border);
                 jPanel2.add(jLabels[i]);
                 
