@@ -46,14 +46,14 @@ public class Database_anamnese {
                
                PreparedStatement preparedStmt = conn.prepareStatement(query);
                preparedStmt.setString (1,getEmail_cliente());
-               preparedStmt.setString(2,String.valueOf(isProblema_mordida()));
-               preparedStmt.setString(3,String.valueOf(isPeriodontite()));
+               preparedStmt.setBoolean(2,isProblema_mordida());
+               preparedStmt.setBoolean(3,isPeriodontite());
                preparedStmt.setString(4,getObservacao());
-               preparedStmt.setString(5,String.valueOf(isPlaca_dental()));
-               preparedStmt.setString(6,String.valueOf(isGengivite()));
-               preparedStmt.setString(6,String.valueOf(isDrogas()));
-               preparedStmt.setString(6,String.valueOf(isCarie()));
-               preparedStmt.setString(6,String.valueOf(isFumante()));
+               preparedStmt.setBoolean(5,isPlaca_dental());
+               preparedStmt.setBoolean(6,isGengivite());
+               preparedStmt.setBoolean(7,isDrogas());
+               preparedStmt.setBoolean(8,isCarie());
+               preparedStmt.setBoolean(9,isFumante());
        
                
                // execute the preparedstatement
