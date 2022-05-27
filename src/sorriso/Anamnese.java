@@ -39,20 +39,63 @@ public class Anamnese extends javax.swing.JFrame {
         
 
         ResultSet rs3 = preparedStmtGetPost.executeQuery();
+        String primeiro_email = "";
+        if (rs3.next()){
+            primeiro_email = rs3.getString(1);
+        }
         
+        rs3 = preparedStmtGetPost.executeQuery();
         while (rs3.next()) {
-                
+        
                 jComboBox1.addItem(rs3.getString(1));
                 
             }
-        queryconteudo = " SELECT * FROM anamnese WHERE nome_cliente = ?";
-        preparedStmtGetPost = conn.prepareStatement(queryconteudo);
-        //preparedStmtGetPost.setString (1,jComboBox1.getSelectedItem());
-
-        //rs3 = preparedStmtGetPost.executeQuery();
+        set_anamnese(primeiro_email);
+      
         
         
     }
+    
+    public void set_anamnese(String email) throws ClassNotFoundException, SQLException{
+        String myDriver = "com.mysql.jdbc.Driver";
+        String myUrl = "jdbc:mysql://localhost:3306/sorriso";
+        Class.forName(myDriver);
+        Connection conn = DriverManager.getConnection(myUrl, "root", "");
+        String queryconteudo = " SELECT * FROM anamnese WHERE nome_cliente = ?";
+        PreparedStatement preparedStmtGetPost = conn.prepareStatement(queryconteudo);
+        preparedStmtGetPost.setString (1,email);
+        ResultSet rs3 = preparedStmtGetPost.executeQuery();
+
+         if (rs3.next()){
+             
+             jRadioButton1.setSelected("1".equals(rs3.getString(3)) ? true:false);
+             jRadioButton2.setSelected("0".equals(rs3.getString(3)) ? true:false);
+             
+             jRadioButton3.setSelected("1".equals(rs3.getString(4)) ? true:false);
+             jRadioButton4.setSelected("0".equals(rs3.getString(4)) ? true:false);
+             
+             jRadioButton5.setSelected("1".equals(rs3.getString(5)) ? true:false);
+             jRadioButton6.setSelected("0".equals(rs3.getString(5)) ? true:false);
+             
+             jRadioButton7.setSelected("1".equals(rs3.getString(6)) ? true:false);
+             jRadioButton8.setSelected("0".equals(rs3.getString(6)) ? true:false);
+             
+             jRadioButton9.setSelected("1".equals(rs3.getString(7)) ? true:false);
+             jRadioButton10.setSelected("0".equals(rs3.getString(7)) ? true:false);
+             
+             jRadioButton11.setSelected("1".equals(rs3.getString(8)) ? true:false);
+             jRadioButton12.setSelected("0".equals(rs3.getString(8)) ? true:false);
+             
+             jRadioButton13.setSelected("1".equals(rs3.getString(9)) ? true:false);
+             jRadioButton14.setSelected("0".equals(rs3.getString(9)) ? true:false);
+             
+             jRadioButton15.setSelected("1".equals(rs3.getString(10)) ? true:false);
+             jRadioButton16.setSelected("0".equals(rs3.getString(10)) ? true:false);
+             
+             jTextArea2.setText(rs3.getString(11));
+         }
+    }
+    
     public void alterna_botao(Checkbox clica, Checkbox anterior){
       
         if (clica.getState()){
@@ -213,7 +256,6 @@ public class Anamnese extends javax.swing.JFrame {
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton2.setSelected(true);
         jRadioButton2.setText("NÃO");
         jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, -1, -1));
 
@@ -228,7 +270,6 @@ public class Anamnese extends javax.swing.JFrame {
         buttonGroup2.add(jRadioButton4);
         jRadioButton4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jRadioButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton4.setSelected(true);
         jRadioButton4.setText("NÃO");
         jPanel1.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, -1, -1));
 
@@ -243,7 +284,6 @@ public class Anamnese extends javax.swing.JFrame {
         buttonGroup3.add(jRadioButton6);
         jRadioButton6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jRadioButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton6.setSelected(true);
         jRadioButton6.setText("NÃO");
         jPanel1.add(jRadioButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 110, -1, -1));
 
@@ -258,7 +298,6 @@ public class Anamnese extends javax.swing.JFrame {
         buttonGroup4.add(jRadioButton8);
         jRadioButton8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jRadioButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton8.setSelected(true);
         jRadioButton8.setText("NÃO");
         jPanel1.add(jRadioButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, -1, -1));
 
@@ -273,7 +312,6 @@ public class Anamnese extends javax.swing.JFrame {
         buttonGroup5.add(jRadioButton10);
         jRadioButton10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jRadioButton10.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton10.setSelected(true);
         jRadioButton10.setText("NÃO");
         jPanel1.add(jRadioButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 170, -1, -1));
 
@@ -288,7 +326,6 @@ public class Anamnese extends javax.swing.JFrame {
         buttonGroup6.add(jRadioButton12);
         jRadioButton12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jRadioButton12.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton12.setSelected(true);
         jRadioButton12.setText("NÃO");
         jPanel1.add(jRadioButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, -1, -1));
 
@@ -303,7 +340,6 @@ public class Anamnese extends javax.swing.JFrame {
         buttonGroup7.add(jRadioButton14);
         jRadioButton14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jRadioButton14.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton14.setSelected(true);
         jRadioButton14.setText("NÃO");
         jPanel1.add(jRadioButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, -1, -1));
 
@@ -318,7 +354,6 @@ public class Anamnese extends javax.swing.JFrame {
         buttonGroup8.add(jRadioButton16);
         jRadioButton16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jRadioButton16.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton16.setSelected(true);
         jRadioButton16.setText("NÃO");
         jPanel1.add(jRadioButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, -1, -1));
 
@@ -365,17 +400,17 @@ public class Anamnese extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Database_anamnese cadastrar = new Database_anamnese();
+         Database_anamnese cadastrar = new Database_anamnese();
         
          cadastrar.setEmail_cliente(jComboBox1.getSelectedItem().toString());
-         cadastrar.setProblema_mordida(jRadioButton1.isEnabled());
-         cadastrar.setFumante(jRadioButton3.isEnabled());
-         cadastrar.setDrogas(jRadioButton5.isEnabled());
-         cadastrar.setCarie(jRadioButton7.isEnabled());
-         cadastrar.setGengivite(jRadioButton9.isEnabled());
-         cadastrar.setPlaca_dental(jRadioButton11.isEnabled());
-         cadastrar.setPeriodontite(jRadioButton13.isEnabled());
-         cadastrar.setTratamento(jRadioButton15.isEnabled());
+         cadastrar.setProblema_mordida(jRadioButton1.isSelected());
+         cadastrar.setFumante(jRadioButton3.isSelected());
+         cadastrar.setDrogas(jRadioButton5.isSelected());
+         cadastrar.setCarie(jRadioButton7.isSelected());
+         cadastrar.setGengivite(jRadioButton9.isSelected());
+         cadastrar.setPlaca_dental(jRadioButton11.isSelected());
+         cadastrar.setPeriodontite(jRadioButton13.isSelected());
+         cadastrar.setTratamento(jRadioButton15.isSelected());
          cadastrar.setObservacao(jTextArea2.getText());
 
         
@@ -390,7 +425,13 @@ public class Anamnese extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        //System.out.println(jComboBox1.getSelectedItem());
+        try {
+            set_anamnese(jComboBox1.getSelectedItem().toString());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Anamnese.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Anamnese.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**

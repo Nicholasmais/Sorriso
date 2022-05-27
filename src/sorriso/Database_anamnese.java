@@ -4,6 +4,7 @@
  */
 package sorriso;
 
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -47,6 +48,7 @@ public class Database_anamnese {
                PreparedStatement preparedStmt = conn.prepareStatement(query);
                preparedStmt.setString (1,getEmail_cliente());
                preparedStmt.setBoolean(2,isProblema_mordida());
+               
                preparedStmt.setBoolean(3,isPeriodontite());
                preparedStmt.setString(4,getObservacao());
                preparedStmt.setBoolean(5,isPlaca_dental());
@@ -62,10 +64,36 @@ public class Database_anamnese {
                this.response = "Cadastrado";
                }
                
-               catch (Exception e2){
-               System.err.println(e2.getMessage());
+               catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException  ex){
+               
+               
+               query = "UPDATE anamnese set nome_cliente = ?, problema_mordida = ? ,periodontite =? ,observacao =? ,placa_dental =? ,gengivite =? ,drogas =? ,carie = ?,fumante = ? where nome_cliente = ?" ;
+               
+               preparedStmt = conn.prepareStatement(query);
+               preparedStmt.setString (1,getEmail_cliente());
+               preparedStmt.setString (10,getEmail_cliente());
+               preparedStmt.setBoolean(2,isProblema_mordida());
+               preparedStmt.setBoolean(3,isPeriodontite());
+               preparedStmt.setString(4,getObservacao());
+               preparedStmt.setBoolean(5,isPlaca_dental());
+               preparedStmt.setBoolean(6,isGengivite());
+               preparedStmt.setBoolean(7,isDrogas());
+               preparedStmt.setBoolean(8,isCarie());
+               preparedStmt.setBoolean(9,isFumante());
+               
+                   
+               preparedStmt.executeUpdate();
+               this.response = "Atualizado";
+               }
+               
+               catch (SQLException e2){
+               
+               System.err.println(e2);
                       
-               this.response = "Não cadastrado: "+e2.getMessage();
+               this.response = "Não cadastrado 3 : "+e2.getMessage();
+                   
+                   
+               
 }
                
          

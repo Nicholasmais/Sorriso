@@ -111,7 +111,7 @@ public class Database_cadastro {
                preparedStmt.setString(2,getTelefone());
                preparedStmt.setString(3,getEmail());
                preparedStmt.setString(4,getSenha());
-               preparedStmt.setString(5,getFuncao());
+               preparedStmt.setString(5,getFuncao().toLowerCase());
        
             
                // execute the preparedstatement
