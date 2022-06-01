@@ -10,6 +10,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -65,9 +67,9 @@ public class Anamnese extends javax.swing.JFrame {
         PreparedStatement preparedStmtGetPost = conn.prepareStatement(queryconteudo);
         preparedStmtGetPost.setString (1,email);
         ResultSet rs3 = preparedStmtGetPost.executeQuery();
-
+        
          if (rs3.next()){
-             
+             System.out.println(rs3.getString(1));
              jRadioButton1.setSelected("1".equals(rs3.getString(3)) ? true:false);
              jRadioButton2.setSelected("0".equals(rs3.getString(3)) ? true:false);
              
@@ -92,7 +94,9 @@ public class Anamnese extends javax.swing.JFrame {
              jRadioButton15.setSelected("1".equals(rs3.getString(10)) ? true:false);
              jRadioButton16.setSelected("0".equals(rs3.getString(10)) ? true:false);
              
+             jLabel14.setText(rs3.getString(12) + rs3.getString(13));
              jTextArea2.setText(rs3.getString(11));
+             
          }
     }
     
@@ -159,6 +163,8 @@ public class Anamnese extends javax.swing.JFrame {
         jRadioButton14 = new javax.swing.JRadioButton();
         jRadioButton15 = new javax.swing.JRadioButton();
         jRadioButton16 = new javax.swing.JRadioButton();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -173,42 +179,42 @@ public class Anamnese extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Problemas na Mordida");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, 169, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 169, -1));
 
         jLabel3.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Fumante");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 78, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Usuário de Drogas");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 111, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Cárie");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Gengivite");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Placa Dental");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Periodontite");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Tratamento Médico");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(204, 204, 204));
@@ -218,7 +224,7 @@ public class Anamnese extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Observação:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
 
         jButton1.setText("SALVAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -226,7 +232,7 @@ public class Anamnese extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 380, 100, 33));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 410, 100, 33));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sorriso/imagem_2022-05-22_141938053-fococlipping-standard.png"))); // NOI18N
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, 210, 220));
@@ -237,125 +243,132 @@ public class Anamnese extends javax.swing.JFrame {
                 jComboBox1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 170, -1));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 170, -1));
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
         jScrollPane2.setViewportView(jTextArea2);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 230, -1));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 230, -1));
 
         jRadioButton1.setBackground(new java.awt.Color(0, 51, 153));
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jRadioButton1.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton1.setText("SIM");
-        jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, -1, -1));
+        jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, -1, -1));
 
         jRadioButton2.setBackground(new java.awt.Color(0, 51, 153));
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton2.setText("NÃO");
-        jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, -1, -1));
+        jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, -1, -1));
 
         jRadioButton3.setBackground(new java.awt.Color(0, 51, 153));
         buttonGroup2.add(jRadioButton3);
         jRadioButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jRadioButton3.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton3.setText("SIM");
-        jPanel1.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, -1, -1));
+        jPanel1.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, -1, -1));
 
         jRadioButton4.setBackground(new java.awt.Color(0, 51, 153));
         buttonGroup2.add(jRadioButton4);
         jRadioButton4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jRadioButton4.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton4.setText("NÃO");
-        jPanel1.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, -1, -1));
+        jPanel1.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 110, -1, -1));
 
         jRadioButton5.setBackground(new java.awt.Color(0, 51, 153));
         buttonGroup3.add(jRadioButton5);
         jRadioButton5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jRadioButton5.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton5.setText("SIM");
-        jPanel1.add(jRadioButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, -1, -1));
+        jPanel1.add(jRadioButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, -1, -1));
 
         jRadioButton6.setBackground(new java.awt.Color(0, 51, 153));
         buttonGroup3.add(jRadioButton6);
         jRadioButton6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jRadioButton6.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton6.setText("NÃO");
-        jPanel1.add(jRadioButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 110, -1, -1));
+        jPanel1.add(jRadioButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, -1, -1));
 
         jRadioButton7.setBackground(new java.awt.Color(0, 51, 153));
         buttonGroup4.add(jRadioButton7);
         jRadioButton7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jRadioButton7.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton7.setText("SIM");
-        jPanel1.add(jRadioButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, -1, -1));
+        jPanel1.add(jRadioButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, -1, -1));
 
         jRadioButton8.setBackground(new java.awt.Color(0, 51, 153));
         buttonGroup4.add(jRadioButton8);
         jRadioButton8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jRadioButton8.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton8.setText("NÃO");
-        jPanel1.add(jRadioButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, -1, -1));
+        jPanel1.add(jRadioButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 170, -1, -1));
 
         jRadioButton9.setBackground(new java.awt.Color(0, 51, 153));
         buttonGroup5.add(jRadioButton9);
         jRadioButton9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jRadioButton9.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton9.setText("SIM");
-        jPanel1.add(jRadioButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, -1, -1));
+        jPanel1.add(jRadioButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, -1, -1));
 
         jRadioButton10.setBackground(new java.awt.Color(0, 51, 153));
         buttonGroup5.add(jRadioButton10);
         jRadioButton10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jRadioButton10.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton10.setText("NÃO");
-        jPanel1.add(jRadioButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 170, -1, -1));
+        jPanel1.add(jRadioButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, -1, -1));
 
         jRadioButton11.setBackground(new java.awt.Color(0, 51, 153));
         buttonGroup6.add(jRadioButton11);
         jRadioButton11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jRadioButton11.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton11.setText("SIM");
-        jPanel1.add(jRadioButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, -1, -1));
+        jPanel1.add(jRadioButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, -1, -1));
 
         jRadioButton12.setBackground(new java.awt.Color(0, 51, 153));
         buttonGroup6.add(jRadioButton12);
         jRadioButton12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jRadioButton12.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton12.setText("NÃO");
-        jPanel1.add(jRadioButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, -1, -1));
+        jPanel1.add(jRadioButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, -1, -1));
 
         jRadioButton13.setBackground(new java.awt.Color(0, 51, 153));
         buttonGroup7.add(jRadioButton13);
         jRadioButton13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jRadioButton13.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton13.setText("SIM");
-        jPanel1.add(jRadioButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, -1, -1));
+        jPanel1.add(jRadioButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, -1, -1));
 
         jRadioButton14.setBackground(new java.awt.Color(0, 51, 153));
         buttonGroup7.add(jRadioButton14);
         jRadioButton14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jRadioButton14.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton14.setText("NÃO");
-        jPanel1.add(jRadioButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, -1, -1));
+        jPanel1.add(jRadioButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, -1, -1));
 
         jRadioButton15.setBackground(new java.awt.Color(0, 51, 153));
         buttonGroup8.add(jRadioButton15);
         jRadioButton15.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jRadioButton15.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton15.setText("SIM");
-        jPanel1.add(jRadioButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, -1, -1));
+        jPanel1.add(jRadioButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, -1, -1));
 
         jRadioButton16.setBackground(new java.awt.Color(0, 51, 153));
         buttonGroup8.add(jRadioButton16);
         jRadioButton16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jRadioButton16.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton16.setText("NÃO");
-        jPanel1.add(jRadioButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, -1, -1));
+        jPanel1.add(jRadioButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, -1, -1));
+
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Última Atualização");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 130, 20));
+
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 160, 20));
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -412,10 +425,18 @@ public class Anamnese extends javax.swing.JFrame {
          cadastrar.setPeriodontite(jRadioButton13.isSelected());
          cadastrar.setTratamento(jRadioButton15.isSelected());
          cadastrar.setObservacao(jTextArea2.getText());
+         
+         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");  
+         LocalDateTime now = LocalDateTime.now();  
+         
+         
+         cadastrar.setData(dtf.format(now).substring(0,10));
+         cadastrar.setHorario(dtf.format(now).substring(10,dtf.format(now).length()));
 
         
         try {
             cadastrar.cadastrar();
+            set_anamnese(jComboBox1.getSelectedItem().toString());
             showMessageDialog(null,cadastrar.getResponse());
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Anamnese.class.getName()).log(Level.SEVERE, null, ex);
@@ -490,6 +511,8 @@ public class Anamnese extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

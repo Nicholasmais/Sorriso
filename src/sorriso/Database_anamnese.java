@@ -26,6 +26,8 @@ public class Database_anamnese {
                private boolean periodontite;
                private boolean tratamento;
                private String observacao;
+               private String data;
+               private String horario;
              
     
     public void cadastrar() throws ClassNotFoundException, SQLException{
@@ -43,7 +45,7 @@ public class Database_anamnese {
                    
                else{
        
-               String query = "INSERT INTO anamnese(nome_cliente,problema_mordida ,periodontite,observacao ,placa_dental,gengivite,drogas,carie,fumante) VALUES (?,?,?,?,?,?,?,?,?)" ;
+               String query = "INSERT INTO anamnese(nome_cliente,problema_mordida ,periodontite,observacao ,placa_dental,gengivite,drogas,carie,fumante, data_atualizacao, horario_atualizacao) VALUES (?,?,?,?,?,?,?,?,?,?,?)" ;
                
                PreparedStatement preparedStmt = conn.prepareStatement(query);
                preparedStmt.setString (1,getEmail_cliente());
@@ -56,6 +58,9 @@ public class Database_anamnese {
                preparedStmt.setBoolean(7,isDrogas());
                preparedStmt.setBoolean(8,isCarie());
                preparedStmt.setBoolean(9,isFumante());
+               
+               preparedStmt.setString (10,getData());
+               preparedStmt.setString (11,getHorario());
        
                
                // execute the preparedstatement
@@ -67,11 +72,11 @@ public class Database_anamnese {
                catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException  ex){
                
                
-               query = "UPDATE anamnese set nome_cliente = ?, problema_mordida = ? ,periodontite =? ,observacao =? ,placa_dental =? ,gengivite =? ,drogas =? ,carie = ?,fumante = ? where nome_cliente = ?" ;
+               query = "UPDATE anamnese set nome_cliente = ?, problema_mordida = ? ,periodontite =? ,observacao =? ,placa_dental =? ,gengivite =? ,drogas =? ,carie = ?,fumante = ?, data_atualizacao = ?, horario_atualizacao = ? where nome_cliente = ?" ;
                
                preparedStmt = conn.prepareStatement(query);
                preparedStmt.setString (1,getEmail_cliente());
-               preparedStmt.setString (10,getEmail_cliente());
+               preparedStmt.setString (12,getEmail_cliente());
                preparedStmt.setBoolean(2,isProblema_mordida());
                preparedStmt.setBoolean(3,isPeriodontite());
                preparedStmt.setString(4,getObservacao());
@@ -81,6 +86,8 @@ public class Database_anamnese {
                preparedStmt.setBoolean(8,isCarie());
                preparedStmt.setBoolean(9,isFumante());
                
+               preparedStmt.setString (10,getData());
+               preparedStmt.setString (11,getHorario());
                    
                preparedStmt.executeUpdate();
                this.response = "Atualizado";
@@ -187,4 +194,22 @@ public class Database_anamnese {
 
     public void setObservacao(String observacao) {
         this.observacao = observacao;
-    }}
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+
+    public String getHorario() {
+        return horario;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
+    }
+}
