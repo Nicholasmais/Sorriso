@@ -4,6 +4,10 @@
  */
 package sorriso;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,8 +22,34 @@ public class Consulta extends javax.swing.JFrame {
     /**
      * Creates new form Calendario
      */
-    public Consulta() {
+    public Consulta() throws ClassNotFoundException, SQLException, SQLException {
         initComponents();
+        
+        String myDriver = "com.mysql.jdbc.Driver";
+        String myUrl = "jdbc:mysql://localhost:3306/sorriso";
+        Class.forName(myDriver);
+        Connection conn = DriverManager.getConnection(myUrl, "root", "");
+             
+
+        String queryconteudo = " SELECT email FROM pessoa WHERE funcao = 'cliente'";
+        String queryconteudo2 = " SELECT email FROM pessoa WHERE funcao = 'dentista'";
+        PreparedStatement preparedStmtGetPost = conn.prepareStatement(queryconteudo);
+        PreparedStatement preparedStmtGetPost2 = conn.prepareStatement(queryconteudo2);
+       
+        ResultSet rs3 = preparedStmtGetPost.executeQuery();
+        ResultSet rs = preparedStmtGetPost2.executeQuery();
+   
+        rs3 = preparedStmtGetPost.executeQuery();
+        while (rs3.next()) {
+        
+                jComboBox1.addItem(rs3.getString(1));
+                
+            }
+        
+        while (rs.next()){
+            jComboBox2.addItem(rs.getString(1));
+        }
+        
     }
 
     /**
@@ -41,12 +71,12 @@ public class Consulta extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(11, 19, 64));
         setForeground(new java.awt.Color(255, 112, 147));
 
@@ -62,10 +92,13 @@ public class Consulta extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setText("Email paciente");
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel4.setText("Email médico");
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel5.setText("Descrição");
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
 
         jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -88,9 +121,9 @@ public class Consulta extends javax.swing.JFrame {
                             .addComponent(jLabel5))
                         .addGap(158, 158, 158)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField3)))
+                            .addComponent(jTextField3)
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
@@ -111,11 +144,11 @@ public class Consulta extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -164,8 +197,8 @@ public class Consulta extends javax.swing.JFrame {
         Database_consulta calendar = new Database_consulta();
         
         
-        calendar.setEmail_dentista(jTextField2.getText());
-        calendar.setEmail_cliente(jTextField1.getText());
+        calendar.setEmail_dentista(jComboBox2.getSelectedItem().toString());
+        calendar.setEmail_cliente(jComboBox1.getSelectedItem().toString());
         calendar.setDate(dateTimePicker1.getDatePicker().toString());
         calendar.setHorario(dateTimePicker1.getTimePicker().toString());
         calendar.setOperacao(jTextField3.getText());
@@ -225,6 +258,8 @@ public class Consulta extends javax.swing.JFrame {
     private com.github.lgooddatepicker.components.CalendarPanel calendarPanel2;
     private com.github.lgooddatepicker.components.DateTimePicker dateTimePicker1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -232,8 +267,6 @@ public class Consulta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }

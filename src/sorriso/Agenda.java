@@ -4,6 +4,9 @@
  */
 package sorriso;
 
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,8 +21,26 @@ public class Agenda extends javax.swing.JFrame {
     /**
      * Creates new form Agenda
      */
-    public Agenda() {
+    public Agenda() throws ClassNotFoundException, SQLException {
         initComponents();
+           String myDriver = "com.mysql.jdbc.Driver";
+        String myUrl = "jdbc:mysql://localhost:3306/sorriso";
+        Class.forName(myDriver);
+        java.sql.Connection conn = DriverManager.getConnection(myUrl, "root", "");
+        
+        String queryconteudo;
+        
+        queryconteudo = " SELECT email FROM pessoa";
+        PreparedStatement preparedStmtGetPost = conn.prepareStatement(queryconteudo);
+       
+        ResultSet rs3 = preparedStmtGetPost.executeQuery();
+   
+        rs3 = preparedStmtGetPost.executeQuery();
+        while (rs3.next()) {
+        
+                jComboBox1.addItem(rs3.getString(1));
+                
+            }
     }
 
     /**
@@ -32,7 +53,10 @@ public class Agenda extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        datePicker1 = new com.github.lgooddatepicker.components.DatePicker();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(152, 169, 250));
@@ -41,27 +65,66 @@ public class Agenda extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(152, 169, 250));
         jPanel1.setForeground(new java.awt.Color(152, 169, 250));
 
-        jLabel1.setFont(new java.awt.Font("Gill Sans MT", 1, 24)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        datePicker1.setText(" ");
+
         jLabel1.setText("Próximas consultas");
+        jLabel1.setFont(new java.awt.Font("Gill Sans MT", 1, 24)); // NOI18N
+
+        jButton1.setText("Buscar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(135, 135, 135)
-                .addComponent(jLabel1)
-                .addContainerGap(257, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabel1)))
+                .addContainerGap(237, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(77, Short.MAX_VALUE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1))))
                 .addContainerGap())
         );
 
         jPanel2.setBackground(new java.awt.Color(11, 19, 64));
+        jPanel2.setMaximumSize(new java.awt.Dimension(100, 100));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -75,15 +138,37 @@ public class Agenda extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 261, Short.MAX_VALUE))
+                .addGap(0, 243, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 57, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(0, 84, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    
+         
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+              
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+              jPanel2.removeAll();
+              
+              jPanel2.repaint();
+              Database_agenda agenda2 = new Database_agenda();
+              
+                try {
+                    agenda2.busca_agenda(jPanel2, jComboBox1.getSelectedItem().toString(), datePicker1.getDate());
+                } catch (ClassNotFoundException | SQLException ex) {
+                    Logger.getLogger(Agenda.class.getName()).log(Level.SEVERE, null, ex);
+                }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,6 +216,9 @@ public class Agenda extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.github.lgooddatepicker.components.DatePicker datePicker1;
+    private javax.swing.JButton jButton1;
+    public javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JPanel jPanel2;

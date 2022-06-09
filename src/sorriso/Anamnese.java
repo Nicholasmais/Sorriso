@@ -27,8 +27,7 @@ public class Anamnese extends javax.swing.JFrame {
      */
     public Anamnese() throws ClassNotFoundException, SQLException {
         initComponents();
-        
-        
+     
         
         String myDriver = "com.mysql.jdbc.Driver";
         String myUrl = "jdbc:mysql://localhost:3306/sorriso";

@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import java.awt.Color;
+import java.time.LocalDate;
+import javax.swing.JComboBox;
 import javax.swing.border.Border;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -33,28 +35,76 @@ public class Database_agenda extends Agenda{
     ArrayList<String> list_consulta = new ArrayList<String>();
    
     
-    public void busca_agenda(JPanel jPanel2) throws ClassNotFoundException, SQLException {
+    public void busca_agenda(JPanel jPanel2, String email, LocalDate data) throws ClassNotFoundException, SQLException {
             
-            String myDriver = "com.mysql.jdbc.Driver";
-            String myUrl = "jdbc:mysql://localhost:3306/sorriso";
-            Class.forName(myDriver);
-            java.sql.Connection conn = DriverManager.getConnection(myUrl, "root", "");
-
-            String querytotal = " SELECT count(*) from consulta";
-            PreparedStatement preparedStmtTotal = conn.prepareStatement(querytotal);
+        String myDriver = "com.mysql.jdbc.Driver";
+        String myUrl = "jdbc:mysql://localhost:3306/sorriso";
+        Class.forName(myDriver);
+        java.sql.Connection conn = DriverManager.getConnection(myUrl, "root", "");
+        
+        String queryconteudo;
+        
+        PreparedStatement preparedStmtGetPost = null;
+               
+        String querytotal;
+        PreparedStatement preparedStmtTotal = null ;
+        
+        if (email == "" && data == null){
+            queryconteudo = " SELECT operacao, nome_cliente, nome_dentista, consulta FROM consulta order by data_consulta, horario_consulta ";
+            preparedStmtGetPost = conn.prepareStatement(queryconteudo);
+            querytotal = " SELECT count(*) from consulta";
+            preparedStmtTotal = conn.prepareStatement(querytotal);}
+        
+          
+        if (data==null && email != ""){
+                queryconteudo = " SELECT operacao, nome_cliente, nome_dentista, consulta FROM consulta WHERE nome_cliente = ? OR nome_dentista = ? order by data_consulta, horario_consulta ";
+                preparedStmtGetPost = conn.prepareStatement(queryconteudo);
+                preparedStmtGetPost.setString(1,email);
+                preparedStmtGetPost.setString(2,email);
+                
+                querytotal = " SELECT count(*) from consulta WHERE nome_cliente = ? OR nome_dentista = ?";
+                preparedStmtTotal = conn.prepareStatement(querytotal);
+                preparedStmtTotal.setString(1,email);
+                preparedStmtTotal.setString(2,email);    
+        }
+            
+            
+        if (data != null && email==""){
+                queryconteudo = " SELECT operacao, nome_cliente, nome_dentista, consulta FROM consulta WHERE data_consulta = ? order by data_consulta, horario_consulta ";
+                preparedStmtGetPost = conn.prepareStatement(queryconteudo);
+                preparedStmtGetPost.setString(1,data.toString());
+                
+                
+                querytotal = " SELECT count(*) from consulta WHERE data_consulta = ?";
+                preparedStmtTotal = conn.prepareStatement(querytotal);
+                preparedStmtTotal.setString(1,data.toString());
+             
+            
+            }
+        
+        if (data != null && email != ""){
+                queryconteudo = " SELECT operacao, nome_cliente, nome_dentista, consulta FROM consulta WHERE data_consulta = ? AND ( nome_cliente = ? OR nome_dentista = ?) order by data_consulta, horario_consulta ";
+                preparedStmtGetPost = conn.prepareStatement(queryconteudo);
+                preparedStmtGetPost.setString(1,data.toString());
+                preparedStmtGetPost.setString(2,email);
+                preparedStmtGetPost.setString(3,email);
+                
+                querytotal = " SELECT count(*) from consulta WHERE data_consulta = ? AND ( nome_cliente = ? OR nome_dentista = ?)";
+                preparedStmtTotal = conn.prepareStatement(querytotal);
+                preparedStmtTotal.setString(1,data.toString());
+                preparedStmtTotal.setString(2,email);
+                preparedStmtTotal.setString(3,email);
+                
+        }
+        
      
 
             ResultSet rs0 = preparedStmtTotal.executeQuery();
-
             if(rs0.next()){
-            total = rs0.getInt(1);}
+                total = rs0.getInt(1);}
+            
 
-
-            String queryconteudo = " SELECT operacao, nome_cliente, nome_dentista, consulta FROM consulta order by data_consulta, horario_consulta ";
-            PreparedStatement preparedStmtGetPost = conn.prepareStatement(queryconteudo);
-           // preparedStmtGetPost.setString(1,username);
-
-            ResultSet rs3 = preparedStmtGetPost.executeQuery();
+        ResultSet rs3 = preparedStmtGetPost.executeQuery();
 
             while (rs3.next()) {
                 operacao = rs3.getString(1); 
@@ -74,9 +124,9 @@ public class Database_agenda extends Agenda{
 
             JLabel[] jLabels = new JLabel[total];
             for (int i = 0; i < total;i++){
-                jLabels[i] = new JLabel("<html><br> Operação: "+list_operacao.get(i) +" Data: "+list_consulta.get(i) + "<br> Paciente: "+list_nome_cliente.get(i)+ " | Médico: " + list_nome_dentista.get(i)+"<br> ."); 
+                jLabels[i] = new JLabel("<html><br> Operação: "+list_operacao.get(i) +" | Data: "+list_consulta.get(i) + "<br> Paciente: "+list_nome_cliente.get(i)+ " | Médico: " + list_nome_dentista.get(i)+"<br> ."); 
                 jLabels[i].setForeground(Color.WHITE);
-                jLabels[i].setSize(700,400);
+                jLabels[i].setSize(200,100);
                 jLabels[i].setBorder(border);
                 jPanel2.add(jLabels[i]);
                 

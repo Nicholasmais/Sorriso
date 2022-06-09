@@ -74,6 +74,7 @@ public class StartPage extends javax.swing.JFrame {
         });
 
         jButton5.setText("Anamnese");
+        jButton5.setEnabled(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -177,14 +178,7 @@ public class StartPage extends javax.swing.JFrame {
        agenda.setLocation(510,130);
        agenda.setResizable(false);
        
-       
-       Database_agenda agenda2 = new Database_agenda();
-                try {
-                    agenda2.busca_agenda(agenda.jPanel2);
-                } catch (ClassNotFoundException | SQLException ex) {
-                    Logger.getLogger(Agenda.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
+              
         agenda.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
